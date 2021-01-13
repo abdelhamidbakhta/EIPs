@@ -1,11 +1,10 @@
 ---
 eip: 1
 title: EIP Purpose and Guidelines
-status: Active
+status: Living
 type: Meta
 author: Martin Becze <mb@ethereum.org>, Hudson Jameson <hudson@ethereum.org>, et al.
 created: 2015-10-27
-updated: 2015-12-07, 2016-02-01, 2018-03-21, 2018-05-29, 2018-10-17, 2019-05-19, 2019-12-04, 2020-06-17
 ---
 
 ## What is an EIP?
@@ -67,43 +66,29 @@ These calls generally result in a "rough consensus" around what EIPs should be i
 
 ### EIP Process 
 
-Following is the process that a successful non-Core EIP will move along:
+The following is the standardization process for all EIPs in all tracks:
 
-```
-[ WIP ] -> [ DRAFT ] -> [ LAST CALL ] -> [ FINAL ]
-```
+![EIP Status Diagram](../assets/eip-1/EIP-process.png)
 
-Following is the process that a successful Core EIP will move along:
+**Idea** - An idea that is pre-draft. This is not tracked within the EIP Repository.
 
-```
-[ IDEA ] -> [ DRAFT ] -> [ LAST CALL ] -> [ ACCEPTED ] -> [ FINAL ]
-```
+**Draft** - The first formally tracked stage of an EIP in development. An EIP is merged by an EIP Editor into the EIP repository when properly formatted.
 
-Each status change is requested by the EIP author and reviewed by the EIP editors. Use a pull request to update the status. Please include a link to where people should continue discussing your EIP. The EIP editors will process these requests as per the conditions below.
+**Review** - An EIP Author marks an EIP as ready for and requesting Peer Review.
 
-* **Idea** -- Once the champion has asked the Ethereum community whether an idea has any chance of support, they will write a draft EIP as a [pull request]. Consider including an implementation if this will aid people in studying the EIP.
-  * :arrow_right: Draft -- If agreeable, EIP editor will assign the EIP a number (generally the issue or PR number related to the EIP) and merge your pull request. The EIP editor will not unreasonably deny an EIP.
-  * :x: Draft -- Reasons for denying draft status include being too unfocused, too broad, duplication of effort, being technically unsound, not providing proper motivation or addressing backwards compatibility, or not in keeping with the [Ethereum philosophy](https://github.com/ethereum/wiki/wiki/White-Paper#philosophy).
-* **Draft** -- Once the first draft has been merged, you may submit follow-up pull requests with further changes to your draft until such point as you believe the EIP to be mature and ready to proceed to the next status. An EIP in draft status must be implemented to be considered for promotion to the next status (ignore this requirement for core EIPs).
-  * :arrow_right: Last Call -- If agreeable, the EIP editor will assign Last Call status and set a review end date (`review-period-end`), normally 14 days later.
-  * :x: Last Call -- A request for Last Call status will be denied if material changes are still expected to be made to the draft. We hope that EIPs only enter Last Call once, so as to avoid unnecessary noise on the RSS feed.
-* **Last Call** -- This EIP will listed prominently on the https://eips.ethereum.org/ website (subscribe via RSS at [last-call.xml](/last-call.xml)).
-  * :x: -- A Last Call which results in material changes or substantial unaddressed technical complaints will cause the EIP to revert to Draft.
-  * :arrow_right: Accepted (Core EIPs only) -- A successful Last Call without material changes or unaddressed technical complaints will become Accepted.
-  * :arrow_right: Final (Non-Core EIPs) -- A successful Last Call without material changes or unaddressed technical complaints will become Final.
-* **Accepted (Core EIPs only)** -- This status signals that material changes are unlikely and Ethereum client developers should consider this EIP for inclusion. Their process for deciding whether to encode it into their clients as part of a hard fork is not part of the EIP process.
-  * :arrow_right: Draft -- The Core Devs can decide to move this EIP back to the Draft status at their discretion. E.g. a major, but correctable, flaw was found in the EIP.
-  * :arrow_right: Rejected -- The Core Devs can decide to mark this EIP as Rejected at their discretion. E.g. a major, but uncorrectable, flaw was found in the EIP.
-  * :arrow_right: Final -- Standards Track Core EIPs must be implemented in at least three viable Ethereum clients before it can be considered Final. When the implementation is complete and adopted by the community, the status will be changed to “Final”.
-* **Final** -- This EIP represents the current state-of-the-art. A Final EIP should only be updated to correct errata.
+**Last Call** - This is the final review window for an EIP before moving to `FINAL`. An EIP editor will assign `Last Call` status and set a review end date (review-period-end), typically 14 days later.
 
-Other exceptional statuses include:
+If this period results in necessary normative changes it will revert the EIP to `REVIEW`.
 
-* **Active** -- Some Informational and Process EIPs may also have a status of “Active” if they are never meant to be completed. E.g. EIP 1 (this EIP).
-* **Abandoned** -- This EIP is no longer pursued by the original authors or it may not be a (technically) preferred option anymore.
-  * :arrow_right: Draft -- Authors or new champions wishing to pursue this EIP can ask for changing it to Draft status.
-* **Rejected** -- An EIP that is fundamentally broken or a Core EIP that was rejected by the Core Devs and will not be implemented. An EIP cannot move on from this state.
-* **Superseded** -- An EIP which was previously Final but is no longer considered state-of-the-art. Another EIP will be in Final status and reference the Superseded EIP. An EIP cannot move on from this state.
+**Final** - This EIP represents the final standard. A Final EIP exists in a state of finality and should only be updated to correct errata and add non-normative clarifications.
+
+**Stagnant** - Any EIP in `DRAFT` or `REVIEW` if inactive for a period of 6 months or greater is moved to `STAGNANT`. An EIP may be resurrected from this state by Authors or EIP Editors through moving it back to `DRAFT`.
+
+>*EIP Authors are notified of any algorithmic change to the status of their EIP*
+
+**Withdrawn** - The EIP Author(s) have withdrawn the proposed EIP. This state has finality and can no longer be resurrected using this EIP number. If the idea is pursued at later date it is considered a new proposal.
+
+**Living** - A special status for EIPs that are designed to be continually updated and not reach a state of finality. This includes most notably EIP-1. Any changes to these EIPs will move between `REVIEW` and `LIVING` states.
 
 ## What belongs in a successful EIP?
 
@@ -116,7 +101,7 @@ Each EIP should have the following parts:
 - Rationale - The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.
 - Backwards Compatibility - All EIPs that introduce backwards incompatibilities must include a section describing these incompatibilities and their severity. The EIP must explain how the author proposes to deal with these incompatibilities. EIP submissions without a sufficient backwards compatibility treatise may be rejected outright.
 - Test Cases - Test cases for an implementation are mandatory for EIPs that are affecting consensus changes. Other EIPs can choose to include links to test cases if applicable.
-- Implementations - The implementations must be completed before any EIP is given status “Final”, but it need not be completed before the EIP is merged as draft. While there is merit to the approach of reaching consensus on the specification and rationale before writing code, the principle of “rough consensus and running code” is still useful when it comes to resolving many discussions of API details.
+- Reference Implementation - An optional section that contains a reference/example implementation that people can use to assist in understanding or implementing this specification.
 - Security Considerations - All EIPs must contain a section that discusses the security implications/considerations relevant to the proposed change. Include information that might be important for security discussions, surfaces risks and can be used throughout the life cycle of the proposal. E.g. include security-relevant design decisions, concerns, important discussions, implementation-specific guidance and pitfalls, an outline of threats and risks and how they are being addressed. EIP submissions missing the "Security Considerations" section will be rejected. An EIP cannot proceed to status "Final" without a Security Considerations discussion deemed sufficient by the reviewers.
 - Copyright Waiver - All EIPs must be in the public domain. See the bottom of this EIP for an example copyright waiver.
 
@@ -136,7 +121,7 @@ Each EIP must begin with an [RFC 822](https://www.ietf.org/rfc/rfc822.txt) style
 
 ` * discussions-to:` *a url pointing to the official discussion thread*
 
-` status:` *Draft, Last Call, Accepted, Final, Active, Abandoned, Rejected, or Superseded*
+` status:` *Draft, Review, Last Call, Final, Stagnant, Withdrawn, Living*
 
 `* review-period-end:` *date review period ends*
 
@@ -162,7 +147,7 @@ Headers requiring dates will always do so in the format of ISO 8601 (yyyy-mm-dd)
 
 #### `author` header
 
-The `author` header optionally lists the names, email addresses or usernames of the authors/owners of the EIP. Those who prefer anonymity may use a username only, or a first name and a username. The format of the author header value must be:
+The `author` header lists the names, email addresses or usernames of the authors/owners of the EIP. Those who prefer anonymity may use a username only, or a first name and a username. The format of the author header value must be:
 
 > Random J. User &lt;address@dom.ain&gt;
 
@@ -175,6 +160,10 @@ if the email address or GitHub username is included, and
 > Random J. User
 
 if the email address is not given.
+
+It is not possible to use both an email and a GitHub username at the same time. If important to include both, one could include their name twice, once with the GitHub username, and once with the email.
+
+At least one author must use a GitHub username, in order to get notified on change requests and have the capability to approve or reject them.
 
 #### `resolution` header
 
@@ -230,23 +219,15 @@ If you are interested in assuming ownership of an EIP, send a message asking to 
 
 The current EIP editors are
 
-` * Nick Johnson (@arachnid)`
-
-` * Casey Detrio (@cdetrio)`
-
-` * Hudson Jameson (@Souptacular)`
-
-` * Vitalik Buterin (@vbuterin)`
-
-` * Nick Savers (@nicksavers)`
-
-` * Martin Becze (@wanderer)`
-
-` * Greg Colvin (@gcolvin)`
-
-` * Alex Beregszaszi (@axic)`
-
-` * Micah Zoltu (@MicahZoltu)`
+- Nick Johnson (@arachnid)
+- Casey Detrio (@cdetrio)
+- Hudson Jameson (@Souptacular)
+- Vitalik Buterin (@vbuterin)
+- Nick Savers (@nicksavers)
+- Martin Becze (@wanderer)
+- Greg Colvin (@gcolvin)
+- Alex Beregszaszi (@axic)
+- Micah Zoltu (@MicahZoltu)
 
 ## EIP Editor Responsibilities
 
@@ -277,24 +258,6 @@ When referring to an EIP by number, it should be written in the hyphenated form 
 ## History
 
 This document was derived heavily from [Bitcoin's BIP-0001] written by Amir Taaki which in turn was derived from [Python's PEP-0001]. In many places text was simply copied and modified. Although the PEP-0001 text was written by Barry Warsaw, Jeremy Hylton, and David Goodger, they are not responsible for its use in the Ethereum Improvement Process, and should not be bothered with technical questions specific to Ethereum or the EIP. Please direct all comments to the EIP editors.
-
-December 7, 2015: EIP-1 has been improved and will be placed as a PR.
-
-February 1, 2016: EIP-1 has added editors, made draft improvements to process, and has merged with Master stream.
-
-March 21, 2018: Minor edits to accommodate the new automatically-generated EIP directory on [eips.ethereum.org](https://eips.ethereum.org/).
-
-May 29, 2018: A last call process was added.
-
-Oct 17, 2018: The `updated` header was introduced.
-
-May 19, 2019: The **Abandoned** status was introduced.
-
-Dec 4, 2019: The "Security Considerations" section was introduced.
-
-June 17, 2020: Canonicalizes the format for referencing EIPs by number in the "Style Guide".
-
-See [the revision history for further details](https://github.com/ethereum/EIPs/commits/master/EIPS/eip-1.md), which is also available by clicking on the History button in the top right of the EIP.
 
 ### Bibliography
 
